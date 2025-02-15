@@ -1,0 +1,48 @@
+
+
+<h1>Books</h1>
+
+<div class=columntag>
+  <p class=titletag>Title</p>
+  <p class=bodytag>Body</p>
+  <span class=button></span>
+</div>
+
+
+<% @books.each do |book| %>
+  <div class="book-box">
+
+      <span class="book-title"><%=book.title %></span>
+      <span class="book-body"><%=book.body %></span>
+
+    <div class="buttonbox">
+      <span class="showbutton"><%=link_to "Show", book_path(book.id) %></span>
+
+      <span class="editbutton"><%=link_to "Edit", edit_book_path(book.id) %></span>
+
+      <span class="destroybutton"><%= link_to "Destroy", book_path(book.id), method: :delete, "data-confirm" => "Are you sure?" %></span>
+    </div>
+
+
+  </div>
+<% end %>
+
+<%# 以下新規投稿機能%>
+
+<h2>New book</h2>
+<%# 新規投稿に関するエラー記述未記入%>
+
+<!-- form_with部分 -->
+<%= form_with model: @book, url: '/books', method: :post do |f| %>
+  
+  <h4>Title</h4>
+  <%= f.text_field :title %>
+	
+  <h4>Body</h4>
+  <%= f.text_area :body %>
+	
+  <%= f.submit 'Create Book' %>
+
+
+<% end %>
+
